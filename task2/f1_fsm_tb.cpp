@@ -1,6 +1,6 @@
 #include "verilated.h"
 #include "verilated_vcd_c.h"
-#include "Vlfsr.h"
+#include "Vf1_fsm.h"
 
 #include "vbuddy.cpp"     // include vbuddy code
 
@@ -11,16 +11,16 @@ int main(int argc, char **argv, char **env) {
   int END = 1000000;
   Verilated::commandArgs(argc, argv);
   // init top verilog instance
-  Vlfsr* top = new Vlfsr;
+  Vf1_fsm* top = new Vf1_fsm;
   // init trace dump
   Verilated::traceEverOn(true);
   VerilatedVcdC* tfp = new VerilatedVcdC;
   top->trace (tfp, 99);
-  tfp->open ("lfsr.vcd");
+  tfp->open ("f1_fsm.vcd");
  
   // init Vbuddy
   if (vbdOpen()!=1) return(-1);
-  vbdHeader("L3T1: PACO");
+  vbdHeader("L3T2: PACO");
   vbdSetMode(1);
 
   top->clk = 1;
@@ -51,7 +51,10 @@ int main(int argc, char **argv, char **env) {
     }
     std::cout << top->data_out << std::endl;*/
     
-    vbdHex(1, top->data_out & 0xF);
+    
+    vbdHex(2, (int(top->data_out) >> 4)& 0xF);
+    vbdHex(1, int(top->data_out)& 0xF);
+    
     vbdBar(top->data_out & 0xFF);
     vbdCycle(i);
 
