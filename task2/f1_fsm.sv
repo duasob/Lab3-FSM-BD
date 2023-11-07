@@ -57,6 +57,6 @@ module f1_fsm(
     endcase
 end
 
-assign data_out = pulse[8:1];
+assign data_out = pulse[7:0];
 
 endmodule
