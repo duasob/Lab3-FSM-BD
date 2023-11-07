@@ -1,6 +1,4 @@
 rm -rf obj_dir
-
-rm -rf obj_dir
 rm -f f1_fsm.vcd
 
 verilator -Wall --cc --trace f1_fsm.sv --exe f1_fsm_tb.cpp

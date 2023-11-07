@@ -2,9 +2,9 @@ module f1_fsm(
     input logic         en,
     input logic         clk,
     input logic         rst,
-    output logic[8:1]   data_out
+    output logic[7:0]   data_out
 );
-    logic [8:1] pulse;
+    logic [7:0] pulse;
     typedef enum  {S0, S1, S2, S3, S4, S5, S6, S7, S8 } my_state;
     my_state current_state, next_state;
 
